@@ -21,6 +21,34 @@
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+
+  <!--
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyA2xnUiNbpeaS2G-W3DBAP1DeSEt7aKQR4",
+      authDomain: "cuarentena-delivery.firebaseapp.com",
+      databaseURL: "https://cuarentena-delivery.firebaseio.com",
+      projectId: "cuarentena-delivery",
+      storageBucket: "cuarentena-delivery.appspot.com",
+      messagingSenderId: "473438949922",
+      appId: "1:473438949922:web:d33c5c4e4a63793c04707b",
+      measurementId: "G-W3YZ2CQ131"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
