@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cuarentenadelivery/Categoria/model/categoria.dart';
 import 'package:cuarentenadelivery/Producto/model/producto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,7 +10,7 @@ class CloudFirestoreAPI {
 
   final Firestore _db = Firestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+*//*
   Future<void> updateCategoriaData(Categoria categoria) async {
     DocumentReference refCategorias = _db.collection(CATEGORIAS).document(categoria.name);
 
@@ -40,4 +40,4 @@ class CloudFirestoreAPI {
       });
     });
   }
-}
+}*/
