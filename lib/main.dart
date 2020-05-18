@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
       bloc: SesionBloc(),
       child: MaterialApp(
         title: 'Cuarentena Delivery',
+        theme: ThemeData(
+          fontFamily: 'BigNoodLetitling'
+        ),
 //      home: Scaffold(
 //        body: Center(
 //          child: Text("Hola Mundo"),

@@ -21,22 +21,18 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
       stream: widget.sesion.screenSizeStream,
       builder: (context, snapshot) {
         List<Categoria> categorias = [
-          Categoria(name: "Lacteos", productos: []),
-          Categoria(name: "Abarrotes", productos: []),
-          Categoria(name: "Articulos de Aseo", productos: []),
-          Categoria(name: "Abarrotes", productos: []),
-          Categoria(name: "Lacteos", productos: []),
-          Categoria(name: "Abarrotes", productos: []),
-          Categoria(name: "Lacteos", productos: []),
+          Categoria(name: "Lacteos", productos: [], urlImage: "https://cdn.pixabay.com/photo/2016/12/06/18/27/milk-1887237_640.jpg"),
+          Categoria(name: "Abarrotes", productos: [], urlImage: "https://cdn.pixabay.com/photo/2017/10/01/20/17/music-2806852_960_720.jpg"),
+          Categoria(name: "Articulos de Aseo", productos: [], urlImage: "https://cdn.pixabay.com/photo/2016/11/19/00/17/broom-1837434_640.jpg"),
         ];
 
         int row = snapshot.hasData?(snapshot.data.width/500).truncate():1;
 
         return Container(
-            height: 600,
+            height: snapshot.hasData?snapshot.data.width/row:500,
             width: snapshot.hasData?snapshot.data.width:500,
             child: GridView.builder(
-                itemCount: 7,
+                itemCount: categorias.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: row),
                 itemBuilder: (BuildContext context, int index){
                   return ButtonCategoria(categorias[index]);
@@ -50,33 +46,38 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
 
   Widget Categorias(List<Categoria> categorias, widthScreen) {
 
-    return Container(
-      height: 600,
-      width: widthScreen,
-      child: GridView.builder(
-        itemCount: 7,
+    return GridView.builder(
+        itemCount: categorias.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: widthScreen/500),
         itemBuilder: (BuildContext context, int index){
           return ButtonCategoria(categorias[index]);
         }
-      )
     );
   }
 
   Widget ButtonCategoria(Categoria categoria){
-    return Container(
-      height: 400,
-      width: null,
-      color: Colors.green,
-      child: Column(
-        children: [
-          Text(categoria.name, style: TextStyle(fontSize: 30),),
-          FadeInImage(
-              placeholder: AssetImage("img/no-image.png"),
-              image: NetworkImage("")
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        FadeInImage(
+            fit: BoxFit.cover,
+            placeholder: AssetImage("img/no-image.png"),
+            image: NetworkImage(categoria.urlImage)
+        ),
+        Container(
+          color: Colors.black.withOpacity(0.4),
+        ),
+        Center(
+          child: Text(
+            categoria.name.toUpperCase(),
+            style: TextStyle(
+                fontSize: 70,
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
