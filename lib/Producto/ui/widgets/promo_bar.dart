@@ -21,61 +21,61 @@ class _PromoBarState extends State<PromoBar> {
   @override
   Widget build(BuildContext context) {
 
+    Size screenSize = MediaQuery.of(context).size;
+
     _controller?.dispose();
     _controller = new PageController(
       initialPage: 0,
       keepPage: false,
-      viewportFraction: 0.9
+      viewportFraction: screenSize.width>1500 ? 1500*0.9/screenSize.width : 0.9
     );
-    if(!(_timer?.isActive??false)){
-      _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage());
-    }else{
+    if((_timer?.isActive??false)){
       _timer.cancel();
+    }else{
+      _timer = new Timer(Duration(seconds: 5), () => cambiarPage(1));
     }
 
-    return InkWell(
-      onTap: (){
-        print("tocado");
-      },
-      onHover: (hover){
-        if(hover){
+
+    return Container(
+      height: screenSize.width>1500 ? 450 : screenSize.width*3/10,
+      child: PageView.builder(
+        itemCount: page.length,
+        controller: _controller,
+        onPageChanged: (page){
           _timer.cancel();
-        }else{
-          _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage());
-        }
-      },
-      child: Container(
-        height: MediaQuery.of(context).size.width*3/10,
-        child: PageView.builder(
-          itemCount: page.length,
-          controller: _controller,
-          itemBuilder: (context, index){
-            return PromoItem(
+          _timer = new Timer(Duration(seconds: 5), () => cambiarPage(page==2 ? 0 : page+1));
+        },
+        itemBuilder: (context, index){
+          return InkWell(
+            onTap: (){
+              print("tocado");
+              _timer.cancel();
+            },
+            onHover: (hover){
+              print(hover);
+              if(hover){
+                _timer.cancel();
+              }else{
+                _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage(_controller?.page==2 ? 0 : _controller?.page+1));
+              }
+            },
+            canRequestFocus: true,
+            child: PromoItem(
               networkImage: page[index],
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  void cambiarPage(){
-    if(_controller?.page >= 2){
-      _controller?.animateToPage(
-          0,
-          duration: Duration(
+  void cambiarPage(int page) async {
+    _controller?.animateToPage(
+        page,
+        duration: Duration(
             seconds: 1
-          ),
-          curve: Curves.ease
-      );
-    }else{
-      _controller?.nextPage(
-          duration: Duration(
-              seconds: 1
-          ),
-          curve: Curves.decelerate
-      );
-    }
-
+        ),
+        curve: Curves.ease
+    );
   }
 }

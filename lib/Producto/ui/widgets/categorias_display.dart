@@ -91,6 +91,16 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
   Widget ButtonCategoria(Categoria categoria, { double width }){
     return InkWell(
       child: Container(
+        decoration: BoxDecoration(
+            color: Colors.blue,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  spreadRadius: 5
+              )
+            ]
+        ),
         width: width,
         height: width,
         margin: EdgeInsets.all(10),

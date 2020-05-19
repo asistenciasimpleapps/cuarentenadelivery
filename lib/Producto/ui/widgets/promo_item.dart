@@ -11,20 +11,19 @@ class PromoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image(
-              fit: BoxFit.fitWidth,
-              image: networkImage
-          ),
-          Container(
-            color: Colors.black.withOpacity(0),
-          ),
-        ],
-      ),
+    Size screenSize = MediaQuery.of(context).size;
+
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image(
+            fit: screenSize.width>1500 ? BoxFit.fitHeight : BoxFit.fitWidth,
+            image: networkImage
+        ),
+        Container(
+          color: Colors.black.withOpacity(0),
+        ),
+      ],
     );
   }
 }
