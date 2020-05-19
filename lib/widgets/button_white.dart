@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 class ButtonWhite extends StatelessWidget {
 
   final String title;
+  final String subText;
   final IconData suffixIcon;
+  VoidCallback onPressed;
 
   ButtonWhite({
     Key key,
     @required this.title,
-    @required this.suffixIcon
+    @required this.suffixIcon,
+    this.onPressed,
+    this.subText = ""
   });
 
   @override
@@ -18,7 +22,6 @@ class ButtonWhite extends StatelessWidget {
 
     final logo = Container(
       margin: EdgeInsets.all(10),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(5),
@@ -30,19 +33,32 @@ class ButtonWhite extends StatelessWidget {
             )
           ]
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(suffixIcon, size: _screenSize.height<800?_screenSize.height/35:40,),
-          Container(
-            width: _screenSize.width<380?_screenSize.width*0.2:null,
-            child: Text(title,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: _screenSize.height<800?_screenSize.height/45:30,
-              ),),
-          )
-        ],
+      child: RaisedButton(
+        onPressed: onPressed,
+        disabledColor: Colors.transparent,
+        disabledTextColor: Colors.black,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        color: Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(suffixIcon, size: _screenSize.height<800?_screenSize.height/35:40,),
+            Container(
+              width: _screenSize.width<380?_screenSize.width*0.2:null,
+              child: Column(
+                children: [
+                  Text(
+                    subText.isEmpty ? title : title+": "+subText,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: _screenSize.height<800?_screenSize.height/45:30,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
 

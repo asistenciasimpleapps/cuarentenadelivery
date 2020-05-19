@@ -27,31 +27,58 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
           Categoria(name: "Articulos de Aseo", productos: [], urlImage: "https://cdn.pixabay.com/photo/2016/11/19/00/17/broom-1837434_640.jpg"),
         ];
 
-        int row = snapshot.hasData?(snapshot.data.width/500).truncate():1;
-        row = snapshot.hasData?(snapshot.data.width<500?1:row):row;
+        int col = snapshot.hasData?(snapshot.data.width/500).truncate():1;
+        col = snapshot.hasData?(snapshot.data.width<500?1:col):col;
+        double widthWrap = snapshot.hasData?-100+snapshot.data.width:40;
+        double widthCol = widthWrap/col-20;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            ButtonWhite(
-              title: "Productos por categoria",
-              suffixIcon: Icons.apps,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ButtonWhite(
+                  title: "Productos por categoria",
+                  suffixIcon: Icons.apps,
+                ),
+                ButtonWhite(
+                  title: "Tipo de vista",
+                  subText: "Grande",
+                  suffixIcon: Icons.view_list,
+                  onPressed: (){},
+                )
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(width: 50,),
                 Container(
-                  height: snapshot.hasData?snapshot.data.width/row:1,
-                  width: snapshot.hasData?-100+snapshot.data.width:1,
-                  child: GridView.builder(
-                    itemCount: categorias.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: row),
-                    itemBuilder: (BuildContext context, int index){
-                      return ButtonCategoria(categorias[index]);
-                    }
-                  )
+                  width: widthWrap,
+                  child: Wrap(
+                    children: [
+                      ButtonCategoria(
+                        categorias[0],
+                        width: widthCol
+                      ),
+                      ButtonCategoria(
+                        categorias[1],
+                        width: widthCol
+                      ),
+                      ButtonCategoria(
+                        categorias[2],
+                        width: widthCol
+                      ),
+                    ],
+                  ),
                 ),
+//                Wrap(
+//
+//                  children: [
+//                    ButtonCategoria(categorias[0])
+//                  ],
+//                ),
                 SizedBox(width: 50,),
               ],
             ),
@@ -61,9 +88,11 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
     );
   }
 
-  Widget ButtonCategoria(Categoria categoria){
+  Widget ButtonCategoria(Categoria categoria, { double width }){
     return InkWell(
       child: Container(
+        width: width,
+        height: width,
         margin: EdgeInsets.all(10),
         child: Stack(
           fit: StackFit.expand,

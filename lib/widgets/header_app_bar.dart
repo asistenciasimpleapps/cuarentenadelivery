@@ -15,9 +15,7 @@ class HeaderAppBar extends StatelessWidget {
 
     _screenSize = MediaQuery.of(context).size;
 
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: Row(
+    return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ButtonWhite(
@@ -26,16 +24,13 @@ class HeaderAppBar extends StatelessWidget {
           ),
           loginButton(sesion)
         ],
-      ),
     );
   }
 
   Widget loginButton(bool sesion) {
-    return sesion?Container(
-      child: ButtonGreen(
+    return sesion?ButtonGreen(
         screenSize: _screenSize,
         title: _screenSize.width<260?Icons.account_box:"Iniciar Sesion",
-      ),
-    ):Container();
+      ):Container();
   }
 }

@@ -23,22 +23,17 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: screenSize.height*0.1,
-              child: HeaderAppBar(true)
-          ),
-          Container(
-            height: screenSize.height*0.9,
-            child: SingleChildScrollView(
+            height: screenSize.height,
+            child: ListView(
               scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
+              children: [
+                HeaderAppBar(true),
                   PromoBar(),
                   CategoriasDisplay(),
-                  PieDePagina()
+                  PieDePagina(),
                 ],
               ),
             ),
-          )
         ],
       ),
     );
