@@ -1,10 +1,8 @@
 # cuarentenadelivery
 
-A new Flutter project.
+Un proyecto web en Flutter para un negocio local. Cuarentena delivery es un almacen tipico de barrio que entrega a domicilio, aceptan pedidos por whatsapp y otras redes sociales. desean una pagina web que les permita mantener actualizado su catalogo de productos.
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
