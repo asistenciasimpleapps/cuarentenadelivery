@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class PromoItem extends StatelessWidget {
 
-  double width = 300;
   final NetworkImage networkImage;
 
   PromoItem({
@@ -12,17 +11,13 @@ class PromoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    width = MediaQuery.of(context).size.height*0.3;
-
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: width,
       child: Stack(
         fit: StackFit.expand,
         children: [
-          FadeInImage(
-              fit: BoxFit.cover,
-              placeholder: AssetImage("img/no-image.png"),
+          Image(
+              fit: BoxFit.fitWidth,
               image: networkImage
           ),
           Container(

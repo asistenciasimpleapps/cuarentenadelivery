@@ -12,9 +12,9 @@ class _PromoBarState extends State<PromoBar> {
 
   PageController _controller;
   List<NetworkImage> page = [
-    NetworkImage("https://cdn.pixabay.com/photo/2016/04/25/23/53/euro-1353420_960_720.jpg"),
-    NetworkImage("https://cdn.pixabay.com/photo/2020/05/16/20/30/dog-5179118_960_720.jpg"),
-    NetworkImage("https://cdn.pixabay.com/photo/2016/09/02/08/58/signs-1638668_960_720.jpg")
+    NetworkImage("https://cdn.pixabay.com/photo/2017/10/03/17/53/nature-2813487_960_720.jpg"),
+    NetworkImage("https://cdn.pixabay.com/photo/2017/10/03/17/53/nature-2813487_960_720.jpg"),
+    NetworkImage("https://cdn.pixabay.com/photo/2017/10/03/17/53/nature-2813487_960_720.jpg")
   ];
   Timer _timer;
 
@@ -31,8 +31,7 @@ class _PromoBarState extends State<PromoBar> {
     }
 
     return Container(
-      width: null,
-      height: MediaQuery.of(context).size.height*0.3,
+      height: MediaQuery.of(context).size.width*3/10,
       child: PageView.builder(
         itemCount: page.length,
         controller: _controller,
