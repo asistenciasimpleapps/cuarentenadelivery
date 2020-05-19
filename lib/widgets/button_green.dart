@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ButtonGreen extends StatefulWidget {
 
-  final String title;
+  final title;
   Size screenSize;
 
   ButtonGreen({
@@ -19,15 +19,22 @@ class _ButtonGreenState extends State<ButtonGreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.screenSize.width < 210 ? widget.screenSize.width*0.2 : null,
+      padding: EdgeInsets.all(10),
+      width: widget.screenSize.width < 260 ? widget.screenSize.width*0.3 : null,
       child: RaisedButton(
-        child: Text(
-          widget.title,
-          style: TextStyle(
+        child: widget.title.toString().contains("IconData") ?
+          Icon(
+            widget.title,
             color: Colors.white,
-            fontSize: 18
+            size: 18,
+          ):
+          Text(
+            widget.title,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18
+            ),
           ),
-        ),
         color: Colors.green,
         onPressed: (){
 

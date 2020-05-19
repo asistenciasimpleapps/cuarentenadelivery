@@ -34,7 +34,7 @@ class HeaderAppBar extends StatelessWidget {
     return sesion?Container(
       child: ButtonGreen(
         screenSize: _screenSize,
-        title: _screenSize.width<210?"IS":"Iniciar Sesion",
+        title: _screenSize.width<260?Icons.account_box:"Iniciar Sesion",
       ),
     ):Container();
   }
