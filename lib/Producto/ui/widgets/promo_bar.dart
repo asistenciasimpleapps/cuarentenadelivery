@@ -21,6 +21,7 @@ class _PromoBarState extends State<PromoBar> {
   @override
   Widget build(BuildContext context) {
 
+    _controller?.dispose();
     _controller = new PageController(
       initialPage: 0,
       keepPage: false,
@@ -28,24 +29,38 @@ class _PromoBarState extends State<PromoBar> {
     );
     if(!(_timer?.isActive??false)){
       _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage());
+    }else{
+      _timer.cancel();
     }
 
-    return Container(
-      height: MediaQuery.of(context).size.width*3/10,
-      child: PageView.builder(
-        itemCount: page.length,
-        controller: _controller,
-        itemBuilder: (context, index){
-          return PromoItem(
-            networkImage: page[index],
-          );
-        },
+    return InkWell(
+      onTap: (){
+        print("tocado");
+      },
+      onHover: (hover){
+        if(hover){
+          _timer.cancel();
+        }else{
+          _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage());
+        }
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.width*3/10,
+        child: PageView.builder(
+          itemCount: page.length,
+          controller: _controller,
+          itemBuilder: (context, index){
+            return PromoItem(
+              networkImage: page[index],
+            );
+          },
+        ),
       ),
     );
   }
 
   void cambiarPage(){
-    if(_controller?.page?.isFinite && _controller?.page >= 2){
+    if(_controller?.page >= 2){
       _controller?.animateToPage(
           0,
           duration: Duration(

@@ -15,15 +15,28 @@ class HeaderAppBar extends StatelessWidget {
 
     _screenSize = MediaQuery.of(context).size;
 
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ButtonWhite(
-            title: "Cuarentena Delivery",
-            suffixIcon: Icons.home,
-          ),
-          loginButton(sesion)
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10,
+            offset: Offset(0,1),
+            spreadRadius: 5
+          )
+        ]
+      ),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ButtonWhite(
+              title: "Cuarentena Delivery",
+              suffixIcon: Icons.home,
+            ),
+            loginButton(sesion)
+          ],
+      ),
     );
   }
 

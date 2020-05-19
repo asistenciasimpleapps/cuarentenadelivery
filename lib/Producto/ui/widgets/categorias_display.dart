@@ -97,9 +97,8 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            FadeInImage(
+            Image(
                 fit: BoxFit.cover,
-                placeholder: AssetImage("img/no-image.png"),
                 image: NetworkImage(categoria.urlImage)
             ),
             Container(

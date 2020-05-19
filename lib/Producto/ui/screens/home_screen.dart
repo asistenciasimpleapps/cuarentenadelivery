@@ -20,20 +20,23 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: Column(
+      body: Stack(
         children: [
           Container(
             height: screenSize.height,
-            child: ListView(
+            child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              children: [
-                HeaderAppBar(true),
+              child: Column(
+                children: [
+                  SizedBox(height: 75,),
                   PromoBar(),
                   CategoriasDisplay(),
                   PieDePagina(),
-                ],
+                  ],
+                ),
               ),
             ),
+          Container(height: 75, child: HeaderAppBar(true)),
         ],
       ),
     );
