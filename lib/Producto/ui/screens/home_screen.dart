@@ -1,5 +1,5 @@
-import 'package:cuarentenadelivery/Categoria/model/categoria.dart';
 import 'package:cuarentenadelivery/Producto/ui/widgets/categorias_display.dart';
+import 'package:cuarentenadelivery/Producto/ui/widgets/pie_de_pagina.dart';
 import 'package:cuarentenadelivery/Producto/ui/widgets/promo_bar.dart';
 import 'package:cuarentenadelivery/Sesion/bloc/sesion_bloc.dart';
 import 'package:cuarentenadelivery/widgets/header_app_bar.dart';
@@ -33,7 +33,8 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   PromoBar(),
-                  CategoriasDisplay()
+                  CategoriasDisplay(),
+                  PieDePagina()
                 ],
               ),
             ),

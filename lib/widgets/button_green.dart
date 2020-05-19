@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class ButtonGreen extends StatefulWidget {
 
   final String title;
+  Size screenSize;
 
   ButtonGreen({
     Key key,
-    @required this.title
+    @required this.title,
+    @required this.screenSize
   });
 
   @override
@@ -17,12 +19,13 @@ class _ButtonGreenState extends State<ButtonGreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      width: widget.screenSize.width < 210 ? widget.screenSize.width*0.2 : null,
       child: RaisedButton(
         child: Text(
           widget.title,
           style: TextStyle(
-            color: Colors.white
+            color: Colors.white,
+            fontSize: 18
           ),
         ),
         color: Colors.green,

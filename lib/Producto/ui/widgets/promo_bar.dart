@@ -12,12 +12,15 @@ class _PromoBarState extends State<PromoBar> {
 
   PageController _controller;
   NetworkImage page1, page2, page3;
+  Timer _timer;
 
   @override
   Widget build(BuildContext context) {
 
     _controller = new PageController();
-    new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage());
+    if(!(_timer?.isActive??false)){
+      _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage());
+    }
 
     page1 = NetworkImage("https://cdn.pixabay.com/photo/2016/04/25/23/53/euro-1353420_960_720.jpg");
     page2 = NetworkImage("https://cdn.pixabay.com/photo/2020/05/16/20/30/dog-5179118_960_720.jpg");
@@ -28,6 +31,7 @@ class _PromoBarState extends State<PromoBar> {
       height: MediaQuery.of(context).size.height*0.3,
       child: PageView(
         controller: _controller,
+
         children: [
           PromoItem(
             networkImage: page1,
@@ -44,13 +48,13 @@ class _PromoBarState extends State<PromoBar> {
   }
 
   Timer cambiarPage(){
-    if(_controller.page == 2){
+    if(_controller.page >= 2){
       _controller.animateToPage(
-          0,
+          _controller.initialPage,
           duration: Duration(
             seconds: 1
           ),
-          curve: Curves.decelerate
+          curve: Curves.ease
       );
     }else{
       _controller.nextPage(

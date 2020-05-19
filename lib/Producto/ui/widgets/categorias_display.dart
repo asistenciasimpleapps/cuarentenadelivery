@@ -1,5 +1,6 @@
 import 'package:cuarentenadelivery/Categoria/model/categoria.dart';
 import 'package:cuarentenadelivery/Sesion/bloc/sesion_bloc.dart';
+import 'package:cuarentenadelivery/widgets/button_white.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
@@ -27,57 +28,68 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
         ];
 
         int row = snapshot.hasData?(snapshot.data.width/500).truncate():1;
+        row = snapshot.hasData?(snapshot.data.width<500?1:row):row;
 
-        return Container(
-            height: snapshot.hasData?snapshot.data.width/row:500,
-            width: snapshot.hasData?snapshot.data.width:500,
-            child: GridView.builder(
-                itemCount: categorias.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: row),
-                itemBuilder: (BuildContext context, int index){
-                  return ButtonCategoria(categorias[index]);
-                }
-            )
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ButtonWhite(
+              title: "Productos por categoria",
+              suffixIcon: Icons.apps,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(width: 50,),
+                Container(
+                  height: snapshot.hasData?snapshot.data.width/row:1,
+                  width: snapshot.hasData?-100+snapshot.data.width:1,
+                  child: GridView.builder(
+                    itemCount: categorias.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: row),
+                    itemBuilder: (BuildContext context, int index){
+                      return ButtonCategoria(categorias[index]);
+                    }
+                  )
+                ),
+                SizedBox(width: 50,),
+              ],
+            ),
+          ],
         );
       }
     );
   }
 
-
-  Widget Categorias(List<Categoria> categorias, widthScreen) {
-
-    return GridView.builder(
-        itemCount: categorias.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: widthScreen/500),
-        itemBuilder: (BuildContext context, int index){
-          return ButtonCategoria(categorias[index]);
-        }
-    );
-  }
-
   Widget ButtonCategoria(Categoria categoria){
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        FadeInImage(
-            fit: BoxFit.cover,
-            placeholder: AssetImage("img/no-image.png"),
-            image: NetworkImage(categoria.urlImage)
-        ),
-        Container(
-          color: Colors.black.withOpacity(0.4),
-        ),
-        Center(
-          child: Text(
-            categoria.name.toUpperCase(),
-            style: TextStyle(
-                fontSize: 70,
-                fontWeight: FontWeight.bold,
-                color: Colors.white
+    return InkWell(
+      child: Container(
+        margin: EdgeInsets.all(10),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            FadeInImage(
+                fit: BoxFit.cover,
+                placeholder: AssetImage("img/no-image.png"),
+                image: NetworkImage(categoria.urlImage)
             ),
-          ),
+            Container(
+              color: Colors.black.withOpacity(0.4),
+            ),
+            Center(
+              child: Text(
+                categoria.name.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 70,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
