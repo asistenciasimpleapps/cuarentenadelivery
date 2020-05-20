@@ -30,11 +30,21 @@ class HeaderAppBar extends StatelessWidget {
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonWhite(
-              title: "Cuarentena Delivery",
-              suffixIcon: Icons.home,
+            Row(
+              children: [
+                SizedBox(width: _screenSize.width>1500 ? 150/420*(_screenSize.width-1500) : 0,),
+                ButtonWhite(
+                  title: "Cuarentena Delivery",
+                  suffixIcon: Icons.home,
+                ),
+              ],
             ),
-            loginButton(sesion)
+            Row(
+              children: [
+                loginButton(sesion),
+                SizedBox(width: _screenSize.width>1500 ? 150/420*(_screenSize.width-1500) : 0,),
+              ],
+            ),
           ],
       ),
     );

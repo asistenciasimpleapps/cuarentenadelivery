@@ -48,11 +48,9 @@ class _PromoBarState extends State<PromoBar> {
         itemBuilder: (context, index){
           return InkWell(
             onTap: (){
-              print("tocado");
               _timer.cancel();
             },
             onHover: (hover){
-              print(hover);
               if(hover){
                 _timer.cancel();
               }else{

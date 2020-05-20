@@ -10,7 +10,7 @@ class ButtonWhite extends StatelessWidget {
   ButtonWhite({
     Key key,
     @required this.title,
-    @required this.suffixIcon,
+    this.suffixIcon,
     this.onPressed,
     this.subText = ""
   });
@@ -21,42 +21,39 @@ class ButtonWhite extends StatelessWidget {
     Size _screenSize = MediaQuery.of(context).size;
 
     final logo = Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(5),
-          boxShadow: [
+          boxShadow: onPressed!=null ?[
             BoxShadow(
                 color: Colors.black26,
                 offset: Offset(0,-0.4),
                 blurRadius: 10
             )
-          ]
+          ] : []
       ),
       child: RaisedButton(
         onPressed: onPressed,
         disabledColor: Colors.transparent,
         disabledTextColor: Colors.black,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 5),
         color: Colors.transparent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(suffixIcon, size: 40,),
+            suffixIcon!=null ? Icon(suffixIcon, size: 25,) : Container(),
             _screenSize.width<370 ? Container() :Container(
-              width: _screenSize.width<640?250-(640-_screenSize.width)/2:250,
-              child: Column(
-                children: [
-                  Text(
-                    subText.isEmpty ? title : title+": "+subText,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
-                  ),
-                ],
+            width: _screenSize.width<450?170-(450-_screenSize.width)/2:170,
+            child: Text(
+              subText.isEmpty ? title : title+": "+subText,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
