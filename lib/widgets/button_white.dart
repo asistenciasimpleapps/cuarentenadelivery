@@ -42,16 +42,16 @@ class ButtonWhite extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(suffixIcon, size: _screenSize.height<800?_screenSize.height/35:40,),
-            Container(
-              width: _screenSize.width<380?_screenSize.width*0.2:null,
+            Icon(suffixIcon, size: 40,),
+            _screenSize.width<370 ? Container() :Container(
+              width: _screenSize.width<640?250-(640-_screenSize.width)/2:250,
               child: Column(
                 children: [
                   Text(
                     subText.isEmpty ? title : title+": "+subText,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: _screenSize.height<800?_screenSize.height/45:30,
+                      fontSize: 30,
                     ),
                   ),
                 ],

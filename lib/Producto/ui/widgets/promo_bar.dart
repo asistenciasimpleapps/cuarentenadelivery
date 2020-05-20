@@ -56,7 +56,7 @@ class _PromoBarState extends State<PromoBar> {
               if(hover){
                 _timer.cancel();
               }else{
-                _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage(_controller?.page==2 ? 0 : _controller?.page+1));
+                _timer = new Timer.periodic(Duration(seconds: 5), (timer) => cambiarPage(_controller?.page!=2 ? _controller.page+1 : 0));
               }
             },
             canRequestFocus: true,

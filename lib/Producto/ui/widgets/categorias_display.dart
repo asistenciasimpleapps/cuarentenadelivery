@@ -38,9 +38,11 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ButtonWhite(
-                  title: "Productos por categoria",
-                  suffixIcon: Icons.apps,
+                Container(
+                  child: ButtonWhite(
+                    title: "Productos por categoria",
+                    suffixIcon: Icons.apps,
+                  ),
                 ),
                 ButtonWhite(
                   title: "Tipo de vista",
