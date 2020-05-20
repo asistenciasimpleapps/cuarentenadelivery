@@ -7,7 +7,6 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 class CategoriasDisplay extends StatefulWidget {
 
   SesionBloc sesion;
-  Map<String,dynamic> tipoVista = new Map<String,dynamic>();
 
   @override
   _CategoriasDisplayState createState() => _CategoriasDisplayState();
@@ -19,16 +18,13 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
   Widget build(BuildContext context) {
 
     widget.sesion = BlocProvider.of<SesionBloc>(context);
-    Size _screenSize = MediaQuery.of(context).size;
 
-    widget.tipoVista = widget.tipoVista.isEmpty ? {
+    widget.sesion.changeVista(widget.sesion.vista == null ? {
       'name'  : 'GRANDE',
-      'size'  : 500
-    } : widget.tipoVista;
+      'size'  : 500,
+      'icon'  : Icons.apps
+    } : widget.sesion.vista);
 
-    return StreamBuilder<Size>(
-      stream: widget.sesion.screenSizeStream,
-      builder: (context, snapshot) {
         List<Categoria> categorias = [
           Categoria(name: "Lacteos", productos: [], urlImage: "https://cdn.pixabay.com/photo/2016/12/06/18/27/milk-1887237_640.jpg"),
           Categoria(name: "Abarrotes", productos: [], urlImage: "https://cdn.pixabay.com/photo/2017/10/01/20/17/music-2806852_960_720.jpg"),
@@ -41,79 +37,60 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
           Categoria(name: "Articulos de Aseo", productos: [], urlImage: "https://cdn.pixabay.com/photo/2016/11/19/00/17/broom-1837434_640.jpg"),
         ];
 
-        int col = snapshot.hasData?(snapshot.data.width/widget.tipoVista['size']).round():1;
-        col = snapshot.hasData?(snapshot.data.width<widget.tipoVista['size']?1:col):col;
-        double widthWrap = snapshot.hasData?-100+snapshot.data.width:40;
-        double widthCol = widthWrap/col-20;
-
         List<Widget> buttonCategorias = new List<Widget>();
         categorias.forEach((element) {
           buttonCategorias.add(
             ButtonCategoria(
                 element,
-                width: widthCol
+                width: widget.sesion.vista != null ? widget.sesion.vista['size'] : 200
             )
           );
         });
 
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    SizedBox(width: _screenSize.width>1500 ? 150/420*(_screenSize.width-1500) : 0,),
-                    ButtonWhite(
-                      title: "Productos por categoria",
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    ButtonWhite(
-                      title: "Tipo de vista",
-                      subText: widget.tipoVista['name'],
-                      suffixIcon: Icons.view_list,
-                      onPressed: (){
-                        setState(() {
-                          widget.tipoVista = widget.tipoVista['name']=='GRANDE' ? {
-                            'name'  : 'PEQUENA',
-                            'size'  : 200
-                          } : {
-                            'name'  : 'GRANDE',
-                            'size'  : 500
-                          };
+                ButtonWhite(title: "Categorias"),
+                ButtonWhite(
+                  title: "Tipo de Vista",
+                  subText: widget.sesion.vista != null ? widget.sesion.vista['name'] : "GRANDE",
+                  suffixIcon: widget.sesion.vista != null ? widget.sesion.vista['icon'] : Icons.apps,
+                  onPressed: (){
+                    switch(widget.sesion.vista != null ? widget.sesion.vista['name'] : "PEQUEÑA"){
+                      case 'GRANDE':
+                        widget.sesion.changeVista({
+                          'name'  : 'PEQUEÑA',
+                          'size'  : 180,
+                          'icon'  : Icons.apps
                         });
-                      },
-                    ),
-                    SizedBox(width: _screenSize.width>1500 ? 150/420*(_screenSize.width-1500) : 0),
-                  ],
+                        break;
+                      case 'PEQUEÑA':
+                        widget.sesion.changeVista({
+                          'name'  : 'GRANDE',
+                          'size'  : 500,
+                          'icon'  : Icons.crop_square
+                        });
+                        break;
+                    }
+                    setState(() {});
+                  },
                 )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(width: 50,),
-                Container(
-                  width: widthWrap,
-                  child: Wrap(
-                    children: buttonCategorias
-                  ),
-                ),
-                SizedBox(width: 50,),
-              ],
+            Wrap(
+              children: buttonCategorias,
             ),
           ],
         );
-      }
-    );
   }
 
   Widget ButtonCategoria(Categoria categoria, { double width }){
     return InkWell(
+      onTap: (){
+
+      },
       child: Container(
         decoration: BoxDecoration(
             color: Colors.blue,
