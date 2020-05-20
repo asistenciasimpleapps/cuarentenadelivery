@@ -13,8 +13,8 @@ const RESOURCES = {
 "manifest.json": "8b085cf3bb370fdbe987bab1bb096401",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"index.html": "3dba923e0336e348cbf9a97a24300fa5",
-"/": "3dba923e0336e348cbf9a97a24300fa5"
+"index.html": "3dbeb37c088617bb2303b2a324798ce9",
+"/": "3dbeb37c088617bb2303b2a324798ce9"
 };
 
 self.addEventListener('activate', function (event) {
