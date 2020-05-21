@@ -1,19 +1,23 @@
+import 'package:cuarentenadelivery/Sesion/bloc/sesion_bloc.dart';
 import 'package:cuarentenadelivery/widgets/button_white.dart';
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 import 'button_green.dart';
 
 class HeaderAppBar extends StatelessWidget {
 
-  final bool sesion;
-  Size _screenSize;
+  final bool login;
+  final bool pop;
 
-  HeaderAppBar(this.sesion);
+  HeaderAppBar({this.login, this.pop});
+
+  SesionBloc sesion;
 
   @override
   Widget build(BuildContext context) {
 
-    _screenSize = MediaQuery.of(context).size;
+    sesion = BlocProvider.of(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -32,7 +36,13 @@ class HeaderAppBar extends StatelessWidget {
           children: [
             Row(
               children: [
-                SizedBox(width: _screenSize.width>1500 ? 150/420*(_screenSize.width-1500) : 0,),
+                SizedBox(width: sesion.screenSize.width>1500 ? 150/420*(sesion.screenSize.width-1500) : 0,),
+                pop?IconButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back, color: Colors.white,),
+                ):Container(),
                 ButtonWhite(
                   title: "Cuarentena Delivery",
                   suffixIcon: Icons.home,
@@ -41,19 +51,14 @@ class HeaderAppBar extends StatelessWidget {
             ),
             Row(
               children: [
-                loginButton(sesion),
-                SizedBox(width: _screenSize.width>1500 ? 150/420*(_screenSize.width-1500) : 0,),
+                login?ButtonGreen(
+                  title: sesion.screenSize.width<260?Icons.account_box:"Iniciar Sesion",
+                ):Container(),
+                SizedBox(width: sesion.screenSize.width>1500 ? 150/420*(sesion.screenSize.width-1500) : 0,),
               ],
             ),
           ],
       ),
     );
-  }
-
-  Widget loginButton(bool sesion) {
-    return sesion?ButtonGreen(
-        screenSize: _screenSize,
-        title: _screenSize.width<260?Icons.account_box:"Iniciar Sesion",
-      ):Container();
   }
 }

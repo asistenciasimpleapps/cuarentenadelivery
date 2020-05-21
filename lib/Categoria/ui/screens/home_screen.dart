@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-          Container(height: 65, child: HeaderAppBar(true)),
+          Container(height: 65, child: HeaderAppBar(login: true,pop: false)),
         ],
       ),
     );

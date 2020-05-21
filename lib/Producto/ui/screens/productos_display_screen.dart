@@ -10,7 +10,7 @@ class ProductosDisplayScreen extends StatelessWidget {
   SesionBloc sesion;
   String categoria;
 
-  ProductosDisplayScreen({this.categoria});
+  ProductosDisplayScreen({@required this.categoria});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,13 @@ class ProductosDisplayScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 75,),
-                  ProductosDisplay(),
+                  ProductosDisplay(categoria: categoria,),
                   PieDePagina(),
                 ],
               ),
             ),
           ),
-          Container(height: 65, child: HeaderAppBar(true)),
+          Container(height: 65, child: HeaderAppBar(login: true,pop: true,)),
         ],
       ),
     );

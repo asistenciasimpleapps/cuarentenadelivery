@@ -8,7 +8,7 @@ class ProductosDisplay extends StatefulWidget {
 
   String categoria;
 
-  ProductosDisplay({this.categoria});
+  ProductosDisplay({@required this.categoria});
 
   @override
   _ProductosDisplayState createState() => _ProductosDisplayState();
@@ -87,14 +87,17 @@ class _ProductosDisplayState extends State<ProductosDisplay> {
 
     List<Widget> buttonProductos = new List<Widget>();
     productos.forEach((element) {
-      buttonProductos.add(
+      print('${element.categoria} == ${widget.categoria}');
+      if(element.categoria == widget.categoria){
+        buttonProductos.add(
           ButtonProducto(
-              element,
-              width: sesion.vista != null
-                  ? sesion.vista['size']
-                  : 200
+            element,
+            width: sesion.vista != null
+                ? sesion.vista['size']
+                : 200
           )
-      );
+        );
+      }
     });
 
     return MostrarCategorias(buttonProductos: buttonProductos);
