@@ -1,7 +1,8 @@
-import 'package:cuarentenadelivery/Sesion/bloc/sesion_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'Producto/ui/screens/home_screen.dart';
+
+import 'Categoria/ui/screens/home_screen.dart';
+import 'Sesion/bloc/sesion_bloc.dart';
 
 void main() {
   runApp(MyApp());
