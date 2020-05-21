@@ -31,7 +31,7 @@ class _CategoriasDisplayState extends State<CategoriasDisplay> {
       buttonCategorias.add(
           ButtonCategoria(
               element,
-              width: widget.sesion.vista != null ? widget.sesion.vista['size'] : 200
+              width: widget.sesion.vista != null ? widget.sesion.vista['size'] : 110
           )
       );
     });

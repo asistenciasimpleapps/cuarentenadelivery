@@ -87,14 +87,13 @@ class _ProductosDisplayState extends State<ProductosDisplay> {
 
     List<Widget> buttonProductos = new List<Widget>();
     productos.forEach((element) {
-      print('${element.categoria} == ${widget.categoria}');
       if(element.categoria == widget.categoria){
         buttonProductos.add(
           ButtonProducto(
             element,
             width: sesion.vista != null
                 ? sesion.vista['size']
-                : 200
+                : 110
           )
         );
       }
